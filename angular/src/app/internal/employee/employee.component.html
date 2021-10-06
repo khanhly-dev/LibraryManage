@@ -1,0 +1,70 @@
+<div class="page-header">
+    <div class="row">
+        <div class="col-6">
+            <h2>Danh sách nhân viên</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href="javascript:;" class="btn bg-blue" (click)="create()">
+                <i class="fa fa-plus-square"></i>
+                Thêm mới
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="search-box">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn bg-blue" (click)="getAll(search.value)">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm..." [(ngModel)]="keyword"
+                    #search (keyup.enter)="getAll(search.value)" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-box">
+    <nz-table #basicTable [nzData]="listData" [nzBordered]="true" class="nz-table">
+        <thead>
+            <tr>              
+                <th class="t-head">Tên</th>
+                <th class="t-head">Ngày sinh</th>
+                <th class="t-head">Số điện thoại</th>
+                <th class="t-head">Ngày bắt đầu</th>
+                <th class="t-head">Chức vụ</th>
+                <th class="t-head">Trạng thái</th>
+                <th class="t-head" style="width: 320px; ">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of basicTable.data, index as i">              
+                <td>{{ item.name }}</td>
+                <td>{{ item.dob | date:'dd-MM-YYYY'}}</td>
+                <td>{{ item.phoneNumber }}</td>
+                <td>{{ item.fromDate | date:'dd-MM-YYYY'}}</td>
+                <td>{{ item.officeName }}</td>
+                <td *ngIf="item.status === true">Đang làm việc</td>
+                <td *ngIf="item.status === false">Đã nghỉ việc</td>
+                <td>
+                    <button type="button" class="btn btn-sm bg-primary mx-2" (click)="createUser(item)">
+                        <i class="fas fa-plus"></i>
+                        Thêm tài khoản
+                    </button>
+                    <button type="button" class="btn btn-sm bg-primary" (click)="edit(item)">
+                        <i class="fas fa-pencil-alt"></i>
+                        Sửa
+                    </button>
+                    <button type="button" class="btn btn-sm bg-danger mx-2" (click)="delete(item)">
+                        <i class="fas fa-trash"></i>
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

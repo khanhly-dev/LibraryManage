@@ -1,0 +1,92 @@
+<div style="background: #ECECEC;padding:30px;">
+    <nz-card [nzBordered]="false" [nzTitle]="modalTitle">
+
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <div class="inner-box">
+                    <form nz-form>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Mã hóa đơn</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.code" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Ngày tạo</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.dateCreated | date:'dd-MM-YYYY'" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Thu ngân</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.userCreated" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Khách hàng</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.customerName" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <div class="inner-box">
+                    <form nz-form>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Tổng tiền</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.originalPrice | currency:'VND'" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Giảm giá</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.discout | currency:'VND'" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Thành tiền</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.totalPrice | currency:'VND'" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSm]="8" [nzXs]="24">Ghi chú</nz-form-label>
+                            <nz-form-control [nzSm]="16" [nzXs]="24">
+                                <input type="text" nz-input [value]="dataItem.note" nzBorderless readonly>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+                <div class="inner-box">
+                    <nz-table #basicTable [nzData]="listBookBuying" [nzBordered]="true" class="nz-table">
+                        <thead>
+                            <tr>              
+                                <th class="t-head">Tên sách</th>
+                                <th class="t-head">Giá sách</th>
+                                <th class="t-head">Số lượng</th>        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of basicTable.data, index as i">              
+                                <td>{{ item.bookName }}</td>
+                                <td>{{ item.bookPrice | currency:'VND' }}</td>
+                                <td>{{ item.quantity }}</td>                       
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </div>
+        </div>
+
+    </nz-card>
+</div>

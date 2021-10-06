@@ -1,0 +1,80 @@
+﻿<div nz-row [nzGutter]="16">
+  <div nz-col class="gutter-row" [nzSpan]="12">
+    <div class="inner-box">
+      <nz-card style="margin: 30px 15px 15px 30px;" nzTitle="Doanh thu theo ngày">
+        <p>Card content</p>
+        <p>Card content</p>
+        <p>Card content</p>
+      </nz-card>
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="12">
+    <div class="inner-box">
+      <nz-card style="margin: 30px 30px 15px 15px;" nzTitle="Doanh thu theo tháng">
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chartType1" [datasets]="chartDatasets1" [labels]="chartLabels1"
+            [colors]="chartColors1" [options]="chartOptions1" [legend]="true" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col class="gutter-row" [nzSpan]="12">
+    <div class="inner-box">
+      <nz-card style="margin: 15px 15px 15px 30px;" nzTitle="Card title">
+        <div style="display: block; width: 100%;">
+          <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+            [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="12">
+    <div class="inner-box">
+      <nz-card style="margin: 15px 30px 15px 15px;" nzTitle="Truyền thông">
+        <div nz-row [nzGutter]="16">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <div class="inner-box">
+              <div style="display: block;">
+                <canvas mdbChart [chartType]="chartType2" [datasets]="chartDatasets2" [labels]="chartLabels2"
+                  [colors]="chartColors2" [options]="chartOptions2" [legend]="true" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <div class="inner-box">
+              <div>
+                <b>Website</b>
+                <nz-progress nzStrokeColor="#f7464a" [nzPercent]="20"></nz-progress>
+              </div>          
+              <div>
+                <b>TV</b>
+                <nz-progress nzStrokeColor="#949fb1" [nzPercent]="10"></nz-progress>
+              </div>
+              <div>
+                <b>Youtube</b>
+                <nz-progress nzStrokeColor="#fdb45c" [nzPercent]="25"></nz-progress>
+              </div>
+              <div>
+                <b>Facebook</b>
+                <nz-progress nzStrokeColor="#46bfbd" [nzPercent]="35"></nz-progress>
+              </div>
+              <div>
+                <b>Khác</b>
+                <nz-progress nzStrokeColor="#4d5360" [nzPercent]="10"></nz-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>

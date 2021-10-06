@@ -1,0 +1,45 @@
+<nz-card [nzTitle]="modalTitle">
+    <form nz-form [formGroup]="createOrEditForm">
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Tên khách hàng</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                <input nz-input formControlName="name" />
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Số điện thoại</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                <input nz-input formControlName="phoneNumber" />
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Ngày sinh</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                <input style="border-radius: 0;" class="form-control" type="date" formControlName="dob">
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Địa chỉ</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                <input nz-input formControlName="adress" />
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                <button nz-button nzType="primary" [disabled]="!createOrEditForm.valid"
+                    (click)="save()">Lưu</button>&nbsp;
+                <button nz-button (click)="close()">Đóng</button>
+            </nz-form-control>
+        </nz-form-item>
+
+    </form>
+
+    <ng-template #userErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Giá trị bắt buộc</ng-container>
+    </ng-template>
+</nz-card>

@@ -1,0 +1,171 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-6">
+      <h2>Thanh toán</h2>
+    </div>
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col class="gutter-row" [nzSpan]="16">
+    <div class="inner-box">
+      <nz-card style="margin-left: 30px;" nzTitle="Thông tin sản phẩm">
+
+        <b>Tìm kiếm sản phẩm</b>
+        <nz-select [(ngModel)]="bookSelect" style="width: 100%;" nzShowSearch
+          (ngModelChange)="addBookIntoBill(productSelect.value)" #productSelect>
+          <nz-option *ngFor="let item of allBook" [nzLabel]="item.name + '  ||  ' + item.price" [nzValue]="item">
+          </nz-option>
+        </nz-select>
+        <br><br>
+
+        <b>Danh sách sản phẩm</b>
+        <nz-table #basicTable [nzBordered]="true" class="nz-table" [nzBordered]="false">
+          <thead>
+            <tr>
+              <th>Tên sách</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Giảm giá</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let contr of datas.controls; index as i">
+              <tr [formGroup]="contr">
+                <td>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                      <input nz-input nzBorderless readonly formControlName="name" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                      <input nz-input nzBorderless readonly formControlName="price" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                      <nz-input-number formControlName="quantity" (ngModelChange)="getOriginalPrice()"></nz-input-number>
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                      <nz-input-number formControlName="discount" (ngModelChange)="getOriginalPrice()"></nz-input-number>
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <button nz-button nzType="primary" nzDanger (click)="removeBookFromBill(i)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <div class="inner-box">
+      <nz-card style="margin-right: 30px;" nzTitle="Thông tin hóa đơn">
+        <form nz-form [formGroup]="billForm">
+          <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Thu ngân:</label>
+                <input nz-input readonly [value]="curentUser" />
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Mã HĐ:</label>
+                <input nz-input formControlName="code" readonly />
+              </div>
+            </div>
+          </div>
+          <br>
+          <div>
+            <label for="">Khách hàng:</label>
+            <div>
+              <nz-select style="width: 90%;" nzShowSearch formControlName="customerId">
+                <nz-option *ngFor="let item of customerList" [nzLabel]="item.name" [nzValue]="item.id">
+                </nz-option>
+              </nz-select>
+              <button nz-button nzType="primary" style="width: 10%; text-align: center;" (click)="createCustomer()">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+          </div>
+          <hr>
+
+          <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Tổng tiền:</label>
+                <input nz-input formControlName="originalPrice" readonly />
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Tổng sản phẩm:</label>
+                <input nz-input formControlName="totalBook" readonly nzBorderless />
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Giảm giá:</label>
+                <input nz-input formControlName="discount" (ngModelChange)="priceCaculation()" />
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Khách cần trả:</label>
+                <input nz-input formControlName="totalPrice" readonly />
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Khách trả:</label>
+                <input nz-input formControlName="pay" (ngModelChange)="getGiveBackMoney()" />
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <div class="inner-box">
+                <label for="">Trả lại:</label>
+                <input nz-input formControlName="giveBack" readonly/>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div>
+            <label for="">Ghi chú:</label>
+            <textarea rows="3" nz-input formControlName="note"></textarea>
+          </div>
+          <br>
+          <div>
+            <button [disabled]="!billForm.valid" nz-button nzType="primary" style="width: 100%; height: 50px;" (click)="onClickCash()">Thanh
+              toán</button>
+          </div>
+        </form>
+      </nz-card>
+    </div>
+  </div>
+</div>

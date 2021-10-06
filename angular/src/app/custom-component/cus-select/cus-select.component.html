@@ -1,0 +1,13 @@
+<!-- <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn..." [formControl]="control">
+  <nz-option *ngFor="let item of listSelect" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+</nz-select> -->
+
+<select 
+style="border-radius: 0;" 
+class="form-select form-select-sm" 
+name="" id="" 
+[formControl]="control"
+(click)="onFocus($event)"
+>
+  <option *ngFor="let item of listSelect" [value]="item.id">{{item.name}}</option>
+</select>

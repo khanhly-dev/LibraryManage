@@ -1,0 +1,61 @@
+<div class="page-header">
+    <div class="row">
+        <div class="col-6">
+            <h2>Danh mục khách hàng</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href="javascript:;" class="btn bg-blue" (click)="create()">
+                <i class="fa fa-plus-square"></i>
+                Thêm mới
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="search-box">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn bg-blue" (click)="getAll(search.value)">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm..." [(ngModel)]="keyword"
+                    #search (keyup.enter)="getAll(search.value)" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-box">
+    <nz-table #basicTable [nzData]="listData" [nzBordered]="true" class="nz-table">
+        <thead>
+            <tr>              
+                <th class="t-head">Tên khách hàng</th>
+                <th class="t-head">Số điện thoại</th>
+                <th class="t-head">Ngày sinh</th>
+                <th class="t-head">Địa chỉ</th>
+                <th class="t-head" style="width: 180px; ">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of basicTable.data, index as i">              
+                <td>{{ item.name }}</td>
+                <td>{{ item.phoneNumber }}</td>
+                <td>{{ item.dob | date:'dd-MM-YYYY' }}</td>
+                <td>{{ item.adress }}</td>
+                <td>
+                    <button type="button" class="btn btn-sm bg-primary" (click)="edit(item)">
+                        <i class="fas fa-pencil-alt"></i>
+                        Sửa
+                    </button>
+                    <button type="button" class="btn btn-sm bg-danger mx-2" (click)="delete(item)">
+                        <i class="fas fa-trash"></i>
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

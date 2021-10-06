@@ -1,0 +1,53 @@
+<nz-card [nzTitle]="modalTitle">
+  <form nz-form [formGroup]="createOrEditForm">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Tên sách</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="name" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Giá</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <nz-input-number style="width:100%" formControlName="price" ></nz-input-number> 
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Tác giả</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="author" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Phân loại</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <cus-select [listSelect]="categoryList" formControlName="categoryId" (onItemSelected)="setSelectedValue($event)"></cus-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Tồn kho</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <nz-input-number style="width:100%" formControlName="stock" ></nz-input-number> 
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!createOrEditForm.valid" (click)="save()">Lưu</button>&nbsp;
+        <button nz-button (click)="close()">Đóng</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+  <ng-template #userErrorTpl let-control>
+    <ng-container *ngIf="control.hasError('required')">Giá trị bắt buộc</ng-container>
+  </ng-template>
+</nz-card>
+
+
