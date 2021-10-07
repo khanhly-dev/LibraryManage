@@ -91,7 +91,7 @@ export class PayComponent extends AppComponentBase implements OnInit {
   }
 
   genBillCode() {
-    this._billService.getListBill('').subscribe(result => {
+    this._billService.getListBill('', undefined, undefined).subscribe(result => {
       let code = 'HDB' + (Math.floor(Math.random() * 9999999) + 1000000);
       while (result.map(x => x.code).includes(code)) {
         code = 'HDB' + (Math.floor(Math.random() * 9999999) + 1000000);
@@ -106,6 +106,7 @@ export class PayComponent extends AppComponentBase implements OnInit {
       oriPrice += this.datas.value[index].price * this.datas.value[index].quantity - this.datas.value[index].discount;
     }
     this.billForm.get('originalPrice').setValue(oriPrice);
+    this.billForm.get('totalPrice').setValue(oriPrice);
   }
 
   priceCaculation() {

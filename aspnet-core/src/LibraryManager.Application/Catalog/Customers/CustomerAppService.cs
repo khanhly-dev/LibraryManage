@@ -25,13 +25,18 @@ namespace LibraryManager.Catalog.Customers
                 Name = request.Name,
                 DOB = request.DOB,
                 PhoneNumber = request.PhoneNumber,
-                Adress = request.Adress
+                Adress = request.Adress,
+                DateCreated = DateTime.Now
             };
 
             if(request.Id > 0)
             {
-                data.Id = request.Id;
-                await _customerRepos.UpdateAsync(data);
+                var cus = await _customerRepos.GetAsync(request.Id);
+                cus.Name = request.Name;
+                cus.DOB = request.DOB;
+                cus.PhoneNumber = request.PhoneNumber;
+                cus.Adress = request.Adress;
+                await _customerRepos.UpdateAsync(cus);
                 return request.Id;
             }
             else

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AppRouteGuard } from '@shared/auth/auth-route-guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/app/about', pathMatch: 'full' },
+    { path: '', redirectTo: '/app/home', pathMatch: 'full', },
     {
         path: 'account',
         loadChildren: () => import('account/account.module').then(m => m.AccountModule), // Lazy load account module
-        data: { preload: true }
+        data: { preload: true },
     },
     {
         path: 'app',

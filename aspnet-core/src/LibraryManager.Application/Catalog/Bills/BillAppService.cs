@@ -85,6 +85,15 @@ namespace LibraryManager.Catalog.Bills
                 query = query.Where(x => x.bi.Code.Trim().ToLower().Contains(request.Keyword)
                 || x.c.Name.Trim().ToLower().Contains(request.Keyword));
             }
+            if (request.FromDate != null)
+            {
+                query = query.Where(x => DateTime.Compare(request.FromDate.Value, x.bi.DateCreated) < 0);
+            }
+
+            if (request.ToDate != null)
+            {
+                query = query.Where(x => DateTime.Compare(request.ToDate.Value, x.bi.DateCreated) > 0);
+            }
 
             var data = await query.Select(x => new BillDto
             {

@@ -46,12 +46,17 @@ namespace LibraryManager.Catalog.BookInBills
             var listIdRequest = new List<int>();
             foreach (var item in request)
             {
+                var book = await _bookRepos.GetAsync(item.BookId);
+
                 var data = new BookInBillEntity
                 {
                     BillId = item.BillId,
                     BookId = item.BookId,
                     Quantity = item.Quantity
                 };
+
+                book.Stock = book.Stock - item.Quantity;
+
                 listIdRequest.Add(item.Id);
                 if (item.Id > 0)
                 {
@@ -60,6 +65,7 @@ namespace LibraryManager.Catalog.BookInBills
                 }
                 else
                 {
+                    await _bookRepos.UpdateAsync(book);
                     await _bookInBillRepos.InsertAsync(data);
                 }
             }

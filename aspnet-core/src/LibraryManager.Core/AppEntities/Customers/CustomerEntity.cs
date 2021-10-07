@@ -15,5 +15,6 @@ namespace LibraryManager.AppEntities.Customers
         public string PhoneNumber { get; set; }
         public DateTime DOB { get; set; }
         public string Adress { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

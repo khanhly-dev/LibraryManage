@@ -17,4 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LibraryManager.Core\LibraryManager.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Catalog\Dashboard\Requests\" />
+  </ItemGroup>
 </Project>

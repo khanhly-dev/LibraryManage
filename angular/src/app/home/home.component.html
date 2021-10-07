@@ -2,9 +2,30 @@
   <div nz-col class="gutter-row" [nzSpan]="12">
     <div class="inner-box">
       <nz-card style="margin: 30px 15px 15px 30px;" nzTitle="Doanh thu theo ngày">
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
+        <div nz-row [nzGutter]="16">
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <div class="inner-box">
+              <h4>Doanh thu trong ngày</h4>
+              <div>
+                <i style="display: inline;" class="fas fa-star-of-life"></i>&nbsp;
+                <p style="display: inline;">{{curentDayRevenue | currency:'VND'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <h4>Tổng số hóa đơn trong ngày</h4>
+        <div>
+          <i style="display: inline;" class="fas fa-star-of-life"></i>&nbsp;
+          <p style="display: inline;">{{totalBillInDay}} Hóa đơn</p>
+        </div>
+        <hr>
+        <h4>Khách hàng đã phục vụ</h4>
+        <div>
+          <i style="display: inline;" class="fas fa-star-of-life"></i>&nbsp;
+          <p style="display: inline;">{{allCustomer}} Khách hàng</p>
+        </div>
       </nz-card>
     </div>
   </div>
@@ -25,7 +46,7 @@
 <div nz-row [nzGutter]="16">
   <div nz-col class="gutter-row" [nzSpan]="12">
     <div class="inner-box">
-      <nz-card style="margin: 15px 15px 15px 30px;" nzTitle="Card title">
+      <nz-card style="margin: 15px 15px 15px 30px;" nzTitle="Khách hàng và doanh thu">
         <div style="display: block; width: 100%;">
           <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
             [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
@@ -54,7 +75,7 @@
               <div>
                 <b>Website</b>
                 <nz-progress nzStrokeColor="#f7464a" [nzPercent]="20"></nz-progress>
-              </div>          
+              </div>
               <div>
                 <b>TV</b>
                 <nz-progress nzStrokeColor="#949fb1" [nzPercent]="10"></nz-progress>

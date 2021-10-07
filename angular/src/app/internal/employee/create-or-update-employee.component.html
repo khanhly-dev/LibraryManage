@@ -32,7 +32,7 @@
         <nz-form-item>
             <nz-form-label [nzSpan]="7" nzRequired>Chức vụ</nz-form-label>
             <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-                <cus-select [listSelect]="officeList" formControlName="officeId"
+                <cus-select [listSelect]="officeList" formControlName="officeId" [listSelect]="officeList"
                     (onItemSelected)="setSelectedValue($event)"></cus-select>
             </nz-form-control>
         </nz-form-item>

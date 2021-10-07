@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { BillDto, BillServiceProxy, BookInBillDto, BookInBillServiceProxy } from '@shared/service-proxies/service-proxies';
+import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BillDetailComponent } from './bill-detail.component';
 import { CreateOrUpdateBillComponent } from './create-or-update-bill.component';
@@ -21,15 +22,29 @@ export class BillComponent extends PagedListingComponentBase<BillDto> implements
   }
 
   ngOnInit(): void {
-    this.getAll('');
+    this.getAll('', '', '');
   }
 
   protected list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
     throw new Error('Method not implemented.');
   }
 
-  getAll(keyword: string) {
-    this._billService.getListBill(keyword).subscribe(x => this.listData = x);
+  getAll(keyword: string, fromDate: string, toDate: string) {
+    var fromDateConvert = null;
+    var toDateConvert = null;
+    if (fromDate != '') {
+      fromDateConvert = moment(fromDate);
+    }
+    else {
+      fromDateConvert = undefined
+    }
+    if (toDate != '') {
+      toDateConvert = moment(toDate);
+    }
+    else {
+      toDateConvert = undefined
+    }
+    this._billService.getListBill(keyword, fromDateConvert, toDateConvert).subscribe(x => this.listData = x);
   }
 
   protected delete(bill: BillDto): void {
@@ -40,7 +55,7 @@ export class BillComponent extends PagedListingComponentBase<BillDto> implements
         if (result) {
           this._billService.deleteBill(bill.id).subscribe(() => {
             abp.notify.success(this.l('SuccessfullyDeleted'));
-            this.getAll('');
+            this.getAll('', '', '');
           });
         }
       }
@@ -73,7 +88,7 @@ export class BillComponent extends PagedListingComponentBase<BillDto> implements
     }
 
     createOrEditDialog.content.onSave.subscribe(() => {
-      this.getAll('')
+      this.getAll('', '', '');
     });
   }
 
@@ -98,10 +113,10 @@ export class BillComponent extends PagedListingComponentBase<BillDto> implements
           },
         }
       );
-    } 
+    }
 
     createOrEditDialog.content.onSave.subscribe(() => {
-      this.getAll('')
+      this.getAll('', '', '');
     });
   }
 }

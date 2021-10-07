@@ -42,73 +42,73 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     }
 
     getMenuItems(): MenuItem[] {
-        return [         
-            new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
-            
-            new MenuItem('Hệ thống', '', 'fas fa-circle', '', [
+        return [
+            new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home', 'Pages.Home'),
+
+            new MenuItem('Hệ thống', '', 'fas fa-circle', 'Pages.System', [
                 new MenuItem(
                     'Tài khoản',
                     '/app/users',
                     'fas fa-user',
                     'Pages.Users'
-                ),    
+                ),
                 new MenuItem(
                     'Phân quyền',
                     '/app/roles',
                     'fas fa-theater-masks',
                     'Pages.Roles'
-                ),                         
+                ),
             ]),
 
-            new MenuItem('Thu ngân', '', 'fas fa-wallet', '', [
+            new MenuItem('Thu ngân', '', 'fas fa-wallet', 'Pages.Cash', [
                 new MenuItem(
                     'Thanh toán',
                     '/app/payment/pay',
                     'fas fa-cash-register',
-                    'Pages.Users'
-                ),    
+                    'Pages.BookInBill'
+                ),
                 new MenuItem(
                     'Hóa đơn',
                     '/app/payment/bill',
                     'fas fa-money-bill',
-                    'Pages.Roles'
-                ),    
+                    'Pages.Bill'
+                ),
                 new MenuItem(
                     'Khách hàng',
                     '/app/payment/customer',
                     'fas fa-users',
-                    'Pages.Roles'
-                ),                        
+                    'Pages.Customer'
+                ),
             ]),
 
-            new MenuItem('Nội bộ', '', 'fas fa-building', '', [
+            new MenuItem('Nội bộ', '', 'fas fa-building', 'Pages.Internal', [
                 new MenuItem(
                     'Chức vụ',
                     '/app/internal/office',
                     'fas fa-file-alt',
-                    'Pages.Users'
-                ),    
+                    'Pages.Office'
+                ),
                 new MenuItem(
                     'Nhân viên',
                     '/app/internal/employee',
                     'fas fa-male',
-                    'Pages.Roles'
-                ),                                       
+                    'Pages.Employee'
+                ),
             ]),
 
-            new MenuItem('Sản phẩm', '', 'fab fa-product-hunt', '', [
+            new MenuItem('Sản phẩm', '', 'fab fa-product-hunt', 'Pages.Product', [
                 new MenuItem(
                     'Phân loại sách',
                     '/app/product/category',
                     'fas fa-bookmark',
-                    'Pages.Users'
-                ),    
+                    'Pages.Category'
+                ),
                 new MenuItem(
                     'Danh mục sách',
                     '/app/product/book',
                     'fas fa-book',
-                    'Pages.Roles'
-                ),                                    
+                    'Pages.Book'
+                ),
             ])
         ];
     }

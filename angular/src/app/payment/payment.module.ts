@@ -23,6 +23,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { CreateOrUpdateBillComponent } from './bill/create-or-update-bill.component';
 import { BillDetailComponent } from './bill/bill-detail.component';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { BillDetailComponent } from './bill/bill-detail.component';
     NzFormModule,
     NzSelectModule,
     NzDatePickerModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzCollapseModule
   ]
 })
 export class PaymentModule { }

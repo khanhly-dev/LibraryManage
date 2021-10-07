@@ -32,6 +32,11 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
             return true;
         }
 
+        if (!this._permissionChecker.isGranted(route.data['permission'])) {
+            this._router.navigate([this.selectBestRoute()]);
+            return false;
+        }
+
         this._router.navigate([this.selectBestRoute()]);
         return false;
     }
@@ -47,6 +52,10 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
         if (this._permissionChecker.isGranted('Pages.Users')) {
             return '/app/admin/users';
+        }
+
+        if (!this._permissionChecker.isGranted('Pages.Home')) {
+            return '/app/about';
         }
 
         return '/app/home';

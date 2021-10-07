@@ -7,19 +7,19 @@ import { PayComponent } from './pay/pay.component';
 
 const routes: Routes = [
   {
-    path: 'pay', component : PayComponent,
-    //data : {permission : 'Pages.Admin.Base.Product'},
-    //canActivate: [AppRouteGuard]
+    path: 'pay', component: PayComponent,
+    data: { permission: 'Pages.BookInBill' },
+    canActivate: [AppRouteGuard]
   },
   {
-    path: 'bill', component : BillComponent,
-    //data : {permission : 'Pages.Admin.Base.Product'},
-    //canActivate: [AppRouteGuard]
+    path: 'bill', component: BillComponent,
+    data: { permission: 'Pages.Bill' },
+    canActivate: [AppRouteGuard]
   },
   {
-    path: 'customer', component : CustomerComponent,
-    //data : {permission : 'Pages.Admin.Base.Product'},
-    //canActivate: [AppRouteGuard]
+    path: 'customer', component: CustomerComponent,
+    data: { permission: 'Pages.Customer' },
+    canActivate: [AppRouteGuard]
   },
 ];
 

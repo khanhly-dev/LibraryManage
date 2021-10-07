@@ -17,8 +17,8 @@ export class CreateOrUpdateEmployeeComponent extends AppComponentBase implements
   saving = false;
   officeList: OfficeDto[] = [];
   status = [
-    {id: true, name: 'Đang làm việc'},
-    {id: false, name: 'Đã nghỉ việc'}
+    { id: true, name: 'Đang làm việc' },
+    { id: false, name: 'Đã nghỉ việc' }
   ]
 
   @Output() onSave = new EventEmitter<any>();
@@ -45,6 +45,8 @@ export class CreateOrUpdateEmployeeComponent extends AppComponentBase implements
       userId: [null],
     });
 
+    this.getAllOffice();
+
     if (this.dataItem) {
       this.createOrEditForm.patchValue(this.dataItem);
       this.createOrEditForm.get('dob').setValue(this.dataItem.dob.format('YYYY-MM-DD'));
@@ -52,12 +54,17 @@ export class CreateOrUpdateEmployeeComponent extends AppComponentBase implements
     }
   }
 
+  getAllOffice() {
+    this._officeServie.getListOfice('').subscribe(x => {
+      this.officeList = x;
+    })
+  }
+
   setSelectedValue($event) {
     this.createOrEditForm.get('officeId').setValue($event);
   }
 
-  setStatusValue($event)
-  {
+  setStatusValue($event) {
     this.createOrEditForm.get('status').setValue($event);
   }
 
@@ -87,8 +94,7 @@ export class CreateOrUpdateEmployeeComponent extends AppComponentBase implements
     );
   }
 
-  close()
-  {
+  close() {
     this.bsModalRef.hide();
   }
 }
